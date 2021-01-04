@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Demo Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+
+  <section id="hero">
+    <div class="hero-container" style="{{ url_for('static', filename='img/hero-logo.png') }};">
+		<table class="table table-striped table-dark">
+		  <caption>List Of Comic Book Characters</caption>
+		  <thead>
+			<tr>
+			  <th scope="col">#</th>
+			  <th scope="col">Name</th>
+			  <th scope="col">First Name</th>
+			  <th scope="col">Series</th>
+			  <th scope="col">Team</th>
+			  <th scope="col">Origin</th>
+			  <th scope="col">Ability</th>
+			  <th scope="col">Creator</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			{% for character in characters %}
+				<tr>
+				  <th scope="row">{{ loop.index }}</th>
+				  <td>{{ character.name }}</td>
+				  <td>{{ character.first_name }}</td>
+				  <td>{{ character.series }}</td>
+				  <td>{{ character.team }}</td>
+				  <td>{{ character.origin }}</td>
+				  <td>{{ character.ability }}</td>
+				  <td>{{ character.creator }}</td>
+				</tr>
+			{% endfor %}			
+		  </tbody>
+		</table>
+    </div>
+  </section>
+
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+
+
+</body>
+
+</html>

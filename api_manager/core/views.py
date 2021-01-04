@@ -1,8 +1,9 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.response import Response
 
 from .serializers import CreatorrSerializer, AbilitySerializer, CharacterSerializer
 from .models import Creator, Ability, Character
+from .producer import publish
 
 from pprint import pprint
 
@@ -16,22 +17,30 @@ class AbilityViewSet(viewsets.ModelViewSet):
     serializer_class = AbilitySerializer
     http_method_names = ['get']
 
-class CharacterViewSet(viewsets.ModelViewSet):
-    queryset = Character.objects.all().order_by('name')
-    serializer_class = CharacterSerializer
-    http_method_names = ['get', 'put', 'post', 'delete']
+class CharacterViewSet(viewsets.ViewSet):
+    def list(self, request):
+        characters = Character.objects.all().order_by('name')
+        serializer = CharacterSerializer(characters, many=True)
+        return Response(serializer.data)
 
     # CREATE NEW Character VIA API - POST
-    def create(self, request, *args, **kwargs):
+    def create(self, request):
         """
         Ex POST:{
-            "name": "MySuperHero",
-            "series": "DC",
-            "team": "JL",
-            "origin": "India",
-            "ability": ["strength", "Good"],
-            "creator": "Stan Lee"
-        }
+                "name": "MySuperHero5",
+                "series": "DC",
+                "team": "JL",
+                "origin": "India",
+                "ability": [
+                    {
+                        "ability": "speed"
+                    }
+                ],
+                "creator": {
+                    "name": "Jack Kirby", 
+                    "country": "US"
+                }
+            }
         """
         character = request.data
 
@@ -51,4 +60,26 @@ class CharacterViewSet(viewsets.ModelViewSet):
         new_character.save()        
 
         serializer = CharacterSerializer(new_character)
+        
+        publish('character_created', serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def retrieve(self, request, pk=None):
+        character = Character.objects.get(id=pk)
+        serializer = CharacterSerializer(character)
         return Response(serializer.data)
+
+    def update(self, request, pk=None):
+        character = Character.objects.get(id=pk)
+        serializer = CharacterSerializer(instance=character, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        publish('character_updated', serializer.data)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+    # DELETE Character VIA API - DELETE
+    def destroy(self, request, pk=None):
+        character = Character.objects.get(id=pk)
+        character.delete()
+        publish('character_deleted', pk)
+        return Response(status=status.HTTP_204_NO_CONTENT)

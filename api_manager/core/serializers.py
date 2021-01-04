@@ -59,7 +59,6 @@ class CharacterSerializer(serializers.ModelSerializer):
             instance.creator = creator
 
         if "ability" in validated_data:
-            print(validated_data['ability'])
             for ability in validated_data.pop('ability'):
                 ability = get_object_or_404(Ability, ability=ability['ability'], level=10)
                 instance.ability.add(ability)        
