@@ -1,61 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="generator" content="Hugo 0.79.0">
+		<title>Demo Template</title>
+		<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+		<meta name="theme-color" content="#7952b3">
+		<style>
+		  .bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		  }
 
-  <title>Demo Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+		  @media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+			  font-size: 3.5rem;
+			}
+		  }
+		</style>
+  </head>
+  <body>
+		<header>
+		  <div class="navbar navbar-dark bg-dark shadow-sm">
+			<div class="container">
+			  <a href="#" class="navbar-brand d-flex align-items-center">
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+				<strong>Micro Service Example</strong>
+			  </a>
+			</div>
+		  </div>
+		</header>
 
-  <!-- Vendor CSS Files -->
-  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-  <!-- Template Main CSS File -->
-  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
-</head>
+		<main>
+		  <section class="py-5 text-center container">
+			<div class="row py-lg-5">
+			  <div class="col-lg-6 col-md-8 mx-auto">
+				<h1 class="fw-light">Micro Service Example</h1>
+			  </div>
+			</div>
+		  </section>
 
-<body>
+		  <div class="album py-5 bg-light">
+			<div class="container">
+			  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+				  {% for character in characters %}
+					  <div class="col">
+						  <div class="card shadow-sm">
+							<img src="https://upload.wikimedia.org/wikipedia/en/c/c0/Avengers_2020_cover_art.png" alt="Avengers">
+							<div class="card-body">
+							  <p class="card-text">
+								<ul class="list-group">
+								  <li class="list-group-item">{{ character.name }}{% if character.first_name %}({{ character.first_name }}){% endif %}</li>
+								  <li class="list-group-item">Series: {{ character.series }}</li>
+								  <li class="list-group-item">Team: {{ character.team }}</li>
+								  <li class="list-group-item">Origin: {{ character.origin }}</li>
+								  <li class="list-group-item">Ability: {{ character.ability }}</li>
+								  <li class="list-group-item">Creator: {{ character.creator }}</li>
+								</ul>
+							  </p>
+							  <div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group">
+								  <button type="button" class="btn btn-sm btn-outline-secondary">Up Vote</button>
+								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Down Vote</button>-->
+								</div>
+							  </div>
+							</div>
+						  </div>
+						</div>
+				  {% endfor %}
+			  </div>
+			</div>
+		  </div>
 
-  <section id="hero">
-    <div class="hero-container" style="{{ url_for('static', filename='img/hero-logo.png') }};">
-		<table class="table table-striped table-dark">
-		  <caption>List Of Comic Book Characters</caption>
-		  <thead>
-			<tr>
-			  <th scope="col">#</th>
-			  <th scope="col">Name</th>
-			  <th scope="col">First Name</th>
-			  <th scope="col">Series</th>
-			  <th scope="col">Team</th>
-			  <th scope="col">Origin</th>
-			  <th scope="col">Ability</th>
-			  <th scope="col">Creator</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			{% for character in characters %}
-				<tr>
-				  <th scope="row">{{ loop.index }}</th>
-				  <td>{{ character.name }}</td>
-				  <td>{{ character.first_name }}</td>
-				  <td>{{ character.series }}</td>
-				  <td>{{ character.team }}</td>
-				  <td>{{ character.origin }}</td>
-				  <td>{{ character.ability }}</td>
-				  <td>{{ character.creator }}</td>
-				</tr>
-			{% endfor %}			
-		  </tbody>
-		</table>
-    </div>
-  </section>
-
-
-  <!-- Vendor JS Files -->
-  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-
-
-</body>
-
+		</main>
+	  <!-- Vendor JS Files -->
+	  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  </body>
 </html>
