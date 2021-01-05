@@ -5,17 +5,25 @@ from .serializers import CreatorrSerializer, AbilitySerializer, CharacterSeriali
 from .models import Creator, Ability, Character
 from .producer import publish
 
-from pprint import pprint
+from django.views.generic import ListView
+
+class CharacterListView(ListView):
+    model = Character
+    template_name = 'index.html'
+    context_object_name = 'characters'
+
 
 class CreatorViewSet(viewsets.ModelViewSet):
     queryset = Creator.objects.all().order_by('name')
     serializer_class = CreatorrSerializer
     http_method_names = ['get']
 
+
 class AbilityViewSet(viewsets.ModelViewSet):
     queryset = Ability.objects.all().order_by('ability')
     serializer_class = AbilitySerializer
     http_method_names = ['get']
+
 
 class CharacterViewSet(viewsets.ViewSet):
     def list(self, request):

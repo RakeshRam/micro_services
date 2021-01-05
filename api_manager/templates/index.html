@@ -1,0 +1,174 @@
+<html>
+	{% load static %}
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="generator" content="Hugo 0.79.0">
+		<title>Demo Template</title>
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+		<meta name="theme-color" content="#7952b3">
+		<style>
+		  .bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		  }
+
+		  @media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+			  font-size: 3.5rem;
+			}
+		  }
+		</style>
+  </head>
+  <body>
+		<header>
+		  <div class="navbar navbar-dark bg-dark shadow-sm">
+			<div class="container">
+			  <a href="#" class="navbar-brand d-flex align-items-center">
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+				<strong>Micro Service Example</strong>
+			  </a>
+			</div>
+		  </div>
+		</header>
+
+		<main>
+		  <section class="py-5 text-center container">
+			<div class="row py-lg-5">
+			  <div class="col-lg-6 col-md-8 mx-auto">
+				<h1 class="fw-light">API Service Example</h1>
+				<!--<button type="button" class="btn btn-sm btn-primary" onclick="$('#myModal').modal('show')">Add New Character</button>-->
+			  </div>
+			</div>
+		  </section>
+
+		  <div class="album py-5 bg-light">
+			<div class="container">
+			  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+				  {% for character in characters %}
+					  <div class="col">
+						  <div class="card shadow-sm">
+							<img src="https://upload.wikimedia.org/wikipedia/en/c/c0/Avengers_2020_cover_art.png" alt="Avengers">
+							<div class="card-body">
+							  <p class="card-text">
+								<ul class="list-group">
+								  <li class="list-group-item">{{ character.name }}{% if character.first_name %}({{ character.first_name }}){% endif %}</li>
+								  <li class="list-group-item">Creator: {{ character.creator.name }}</li>
+								  <li class="list-group-item">
+									<button type="button" class="btn btn-primary">
+										Total Vote <span class="badge badge-light">{{ character.votes }}</span>
+									</button>
+								  </li>
+								</ul>
+							  </p>
+							  <!--<div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group">
+								  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="updateCharacter({{ character.id }})">Update</button>
+								  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="deleteCharacter({{ character.id }})">Delete</button>
+								</div>
+							  </div>-->
+							</div>
+						  </div>
+						</div>
+				  {% endfor %}
+			  </div>
+			</div>
+		  </div>
+
+		</main>
+		<!--<div class="modal fade" id="myModal" role="dialog" data-backdrop="false">
+			<div class="modal-dialog">
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 id='m-header' class="modal-title">Add New Character</h4>
+				</div>
+				<div class="modal-body">
+					<form id="apiForm" action="">
+						<label for="name">Character Name:</label><br>
+						<input type="text" id="name" name="name" value=""><br><br>
+						<label for="first_name">First Name:</label><br>
+						<input type="text" id="first_name" name="first_name" value=""><br><br>
+						<label for="last_name">Last Name:</label><br>
+						<input type="text" id="last_name" name="last_name" value=""><br><br>
+						<label for="origin">Origin:</label><br>
+						<input type="text" id="origin" name="origin" value=""><br><br>
+						<label for="team">Team:</label><br>
+						<select id="team" name="team">
+							<option value="Avengers">Avengers</option>
+							<option value="Justice League">Justice League</option>						
+						</select><br><br>
+						<label for="creator">creator:</label><br>
+						<input type="text" id="creator" name="creator" value=""><br><br>
+						<button id="myFormSubmit" class="btn btn-primary" type="submit">Submit</button>
+					</form> 
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+			
+			</div>
+		</div>-->
+	  <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+	  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+	  <!--<script>
+	    // Adds New Character Record
+		$('#myFormSubmit').click(function(e){
+			e.preventDefault();
+			fetch(`/api/characters/`, {
+				method: 'POST',
+				headers: {
+				  'Content-Type':'application/x-www-form-urlencoded',
+				  'X-CSRFToken': '{{ csrf_token }}'
+				},
+				body:$('#apiForm').serialize()
+			})
+		    .then(response => {
+				if (response.ok){
+					setInterval('location.reload()', 1000);
+				}else{
+					alert("An Error has occured in Create function");
+				}
+			});
+				
+		});
+		
+	    // Updates Characters Record
+		function updateCharacter(character_id){
+			fetch(`/api/characters/${character_id}/`, {
+				method: 'PUT',
+				headers: {
+				  'Content-Type': 'application/json'
+				}
+				//body:JSON.stringify()
+			})
+		    .then(response => response.json())
+		    .then(data => console.log(data));
+		}
+		
+		// Delete Record from Characters table
+		function deleteCharacter(character_id){
+			fetch(`/api/characters/${character_id}/`, {
+				method: 'DELETE',
+				headers: {
+				  'X-CSRFToken': '{{ csrf_token }}'
+				}
+			})
+		    .then(response => {
+				if (response.ok){
+					setInterval('location.reload()', 1000);
+				}else{
+					alert("An Error has occured in delete function");
+				}
+			});
+		}
+	  </script>-->
+  </body>
+</html>
