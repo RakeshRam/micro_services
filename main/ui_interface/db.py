@@ -16,18 +16,16 @@ class Character(db.Model):
     archenemy = db.Column(db.String(60))
     creator = db.Column(db.String(60))
     is_villan = db.Column(db.Boolean)
-    vote = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return self.name
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer)
     username = db.Column(db.String(80), unique=True, nullable=False)
     character_id = db.Column(db.Integer)
 
-    UniqueConstraint('user_id', 'character_id', name='user_character_unique')
+    UniqueConstraint('username', 'character_id', name='user_character_unique')
 
     def __repr__(self):
         return self.username
