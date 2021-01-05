@@ -16,6 +16,7 @@ class Character(db.Model):
     archenemy = db.Column(db.String(60))
     creator = db.Column(db.String(60))
     is_villan = db.Column(db.Boolean)
+    vote = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return self.name

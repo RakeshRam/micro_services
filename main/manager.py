@@ -1,4 +1,5 @@
-from ui_interface.db import db, app
+from ui_interface.db import db
+from ui_interface.main import app
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 

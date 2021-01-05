@@ -6,7 +6,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///main.sqlite3"
 CORS(app)
 
-from db import db, Character
+try:
+    from db import db, Character
+except: # TODO fix circular imports
+    from .db import db, Character
+    
 db.init_app(app)    
 
 @app.route('/')
