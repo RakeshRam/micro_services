@@ -65,7 +65,7 @@
 							  </p>
 							  <div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-								  <button type="button" class="btn btn-sm btn-outline-secondary">Up Vote</button>
+								  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="vote(1, {{ character.id }})">Up Vote</button>
 								  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Down Vote</button>-->
 								</div>
 							  </div>
@@ -81,5 +81,14 @@
 	  <!-- Vendor JS Files -->
 	  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 	  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+	  <script>
+		function vote(user_id, character_id){
+			fetch(`/character/${user_id}/${character_id}/vote`, {
+				method: 'POST'
+			})
+		    .then(response => response.json())
+		    .then(data => console.log(data));
+		}
+	  </script>
   </body>
 </html>
