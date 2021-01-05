@@ -26,6 +26,7 @@ class Character(models.Model):
     archenemy = models.ManyToManyField("self", blank=True)
     creator = models.ForeignKey(Creator, on_delete=models.CASCADE)
     is_villan = models.BooleanField(default=False)
+    votes = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

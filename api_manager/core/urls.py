@@ -8,6 +8,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r'creators', views.CreatorViewSet)
 router.register(r'ability', views.AbilityViewSet)
+router.register(r'characters', views.CharacterViewSet, 'characters')
 
 # Wire up API's using automatic URL routing
 # Include login urls for browsable API
