@@ -51,15 +51,16 @@ class CharacterViewSet(viewsets.ViewSet):
             }
         """
         character = request.data
-
+        
         if "ability" in character:
             ability_list = []
             for ab in character.pop('ability'):
-                ability, _ = Ability.objects.get_or_create(ability=ab, level=10)
+                ability, _ = Ability.objects.get_or_create(**ab, level=10)
                 ability_list.append(ability)
 
-        if "creator" in character:
-            creator, _ = Creator.objects.get_or_create(name=character['creator'])
+        creator = character.get('creator', {}).get('name')
+        if creator:
+            creator, _ = Creator.objects.get_or_create(name=creator)
             character['creator'] = creator
 
         new_character = Character.objects.create(**character)

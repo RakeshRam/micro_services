@@ -12,11 +12,19 @@ channel.queue_declare(queue='main')
 def callback(ch, method, properties, body):
     print('Received in main')
     data = json.loads(body)
-    print(data)
+
+    # Clean Input Data
+    for item in ('ability', 'archenemy'):
+        if item in data:
+            data[item] = ", ".join(i[item] for i in data[item])
+    if 'creator' in data:
+        data['creator'] = data.get('creator', {}).get('name', 'NA')
+    if 'votes' in data:
+        del data['votes']
 
     if properties.content_type == 'character_created':
         with app.app_context():
-            character = Character(id=data['id'], name=data['name'], origin=data['origin'])
+            character = Character(**data)
             db.session.add(character)
             db.session.commit()
         print('Character Created')
@@ -24,9 +32,12 @@ def callback(ch, method, properties, body):
     elif properties.content_type == 'character_updated':
         with app.app_context():
             character = Character.query.get(data['id'])
-            character.name = data['name']
-            character.creator = data['creator']['name']
-            character.origin = data['origin']   
+            character.name = data.get('name', character.name)
+            character.creator = data.get('creator', character.creator)
+            character.origin = data.get('origin', character.origin)
+            character.team = data.get('team', character.team)
+            character.series = data.get('series', character.series)
+            character.ability = data.get('ability', character.ability)
             db.session.commit()
         print('Character Updated')
 
