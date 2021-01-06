@@ -42,7 +42,6 @@
 			<div class="row py-lg-5">
 			  <div class="col-lg-6 col-md-8 mx-auto">
 				<h1 class="fw-light">API Service Example</h1>
-				<!--<button type="button" class="btn btn-sm btn-primary" onclick="$('#myModal').modal('show')">Add New Character</button>-->
 			  </div>
 			</div>
 		  </section>
@@ -60,18 +59,12 @@
 								  <li class="list-group-item">{{ character.name }}{% if character.first_name %}({{ character.first_name }}){% endif %}</li>
 								  <li class="list-group-item">Creator: {{ character.creator.name }}</li>
 								  <li class="list-group-item">
-									<button type="button" class="btn btn-primary">
-										Total Vote <span class="badge badge-light">{{ character.votes }}</span>
-									</button>
+									<div class="progress">
+									  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{ character.votes }}%" aria-valuenow="{{ character.votes }}" aria-valuemin="0" aria-valuemax="5">{{ character.votes }}</div>
+									</div>
 								  </li>
 								</ul>
 							  </p>
-							  <!--<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-								  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="updateCharacter({{ character.id }})">Update</button>
-								  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="deleteCharacter({{ character.id }})">Delete</button>
-								</div>
-							  </div>-->
 							</div>
 						  </div>
 						</div>
@@ -81,94 +74,5 @@
 		  </div>
 
 		</main>
-		<!--<div class="modal fade" id="myModal" role="dialog" data-backdrop="false">
-			<div class="modal-dialog">
-
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 id='m-header' class="modal-title">Add New Character</h4>
-				</div>
-				<div class="modal-body">
-					<form id="apiForm" action="">
-						<label for="name">Character Name:</label><br>
-						<input type="text" id="name" name="name" value=""><br><br>
-						<label for="first_name">First Name:</label><br>
-						<input type="text" id="first_name" name="first_name" value=""><br><br>
-						<label for="last_name">Last Name:</label><br>
-						<input type="text" id="last_name" name="last_name" value=""><br><br>
-						<label for="origin">Origin:</label><br>
-						<input type="text" id="origin" name="origin" value=""><br><br>
-						<label for="team">Team:</label><br>
-						<select id="team" name="team">
-							<option value="Avengers">Avengers</option>
-							<option value="Justice League">Justice League</option>						
-						</select><br><br>
-						<label for="creator">creator:</label><br>
-						<input type="text" id="creator" name="creator" value=""><br><br>
-						<button id="myFormSubmit" class="btn btn-primary" type="submit">Submit</button>
-					</form> 
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-			
-			</div>
-		</div>-->
-	  <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
-	  <script src="{% static 'js/bootstrap.min.js' %}"></script>
-	  <!--<script>
-	    // Adds New Character Record
-		$('#myFormSubmit').click(function(e){
-			e.preventDefault();
-			fetch(`/api/characters/`, {
-				method: 'POST',
-				headers: {
-				  'Content-Type':'application/x-www-form-urlencoded',
-				  'X-CSRFToken': '{{ csrf_token }}'
-				},
-				body:$('#apiForm').serialize()
-			})
-		    .then(response => {
-				if (response.ok){
-					setInterval('location.reload()', 1000);
-				}else{
-					alert("An Error has occured in Create function");
-				}
-			});
-				
-		});
-		
-	    // Updates Characters Record
-		function updateCharacter(character_id){
-			fetch(`/api/characters/${character_id}/`, {
-				method: 'PUT',
-				headers: {
-				  'Content-Type': 'application/json'
-				}
-				//body:JSON.stringify()
-			})
-		    .then(response => response.json())
-		    .then(data => console.log(data));
-		}
-		
-		// Delete Record from Characters table
-		function deleteCharacter(character_id){
-			fetch(`/api/characters/${character_id}/`, {
-				method: 'DELETE',
-				headers: {
-				  'X-CSRFToken': '{{ csrf_token }}'
-				}
-			})
-		    .then(response => {
-				if (response.ok){
-					setInterval('location.reload()', 1000);
-				}else{
-					alert("An Error has occured in delete function");
-				}
-			});
-		}
-	  </script>-->
   </body>
 </html>
