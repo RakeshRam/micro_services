@@ -1,6 +1,6 @@
 # Flask Example UI Application
 
-Example Flask UI App with REST and Docker(Optional) for a Microservices Architecture.
+Example Flask UI App with REST, MySQL, Message-Broker and Docker for a Microservices Architecture.
 
 ## <u>Installation</u>
 
@@ -11,30 +11,48 @@ From project root DIR run
 ## <u>Usage(Docker)</u>
 
 ```bash
-docker-compose up
+docker-compose up --build
+```
+
+---
+
+## <u>DB SetUp</u>
+
+```bash
+python manager.py db init
+python manager.py db migrate
+python manager.py db upgrade
 ```
 
 ---
 
 ## <u>Usage(Manual)</u>
 
-To Set-up environment and dummy data.
+Set-up Local Environment:
 
 ```bash
-pip install -r requirments.txt
+pip install -r requirements.txt
 ```
 
-Run server in local environment.
+Start Local Server:
 
 ```bash
-python main.py
+python ui_interface/main.py
+```
+
+Run MQ Consumer:
+
+```bash
+python ui_interface/producer.py
 ```
 
 ---
 
 ## <u>Features</u>
 
-* Demo Super Heros Gallery
+* Demo Super Heros Gallery with vote button.
+  * Docker `http://localhost:8001/`
+  * Manual `http://localhost:5000/`
 * App Integrated with Docker(Optional)
 
 ---

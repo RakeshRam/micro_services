@@ -1,6 +1,6 @@
 # Django Example API Application
 
-Example Django App with REST and Docker(Optional) for a Microservices Architecture.
+Example Django App using REST, MySQL, Message-Broker and Docker for a Microservices Architecture.
 
 ## <u>Installation</u>
 
@@ -11,42 +11,105 @@ From project root DIR run
 ## <u>Usage(Docker)</u>
 
 ```bash
-docker-compose up
+docker-compose up --build
+```
+
+---
+
+## <u>DB SetUp</u>
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 ---
 
 ## <u>Usage(Manual)</u>
 
-To Set-up environment and dummy data.
+Set-up Local Environment:
 
 ```bash
-pip install -r requirments.txt
-python manage.py makemigrations
-python manage.py migrate
-python manage.py SetUpData
+pip install -r requirements.txt
 ```
 
-Run server in local environment.
+Start local server:
 
 ```bash
 python manage.py runserver
+```
+
+Run MQ Consumer:
+
+```bash
+python consumer.py
 ```
 
 ---
 
 ## <u>Features</u>
 
+* Demo Super Heros Admin Page
+  * `http://localhost:8000/`
 * Basic DRF implementation(CRUD)
   * [Django REST framework](https://www.django-rest-framework.org/)
+* RabbitMQ integration for message-broker.
+  * [CloudAMQP](https://www.cloudamqp.com/)
 * App Integrated with Docker(Optional)
 
 ---
 
 ## <u>API Usage Demo</u>
 
-### **DjangoRestFramework:** `/core/api/`
+### **DjangoRestFramework:** `/api/`
 
+* **Query Characters Record -> GET**
+
+  ```javascript
+  /api/characters/
+  /api/characters/<CHARACTER-ID>/
+  ```
+
+* **Create New Characters -> POST**
+
+  ```JAVASCRIPT
+  /api/characters/
+  ```
+
+  Example:
+
+  ```javascript
+  {
+    "name": "Iron Man",
+    "series": "Marvel",
+    "team": "Avengers",
+    "origin": "NewYork",
+    "ability": [
+      {
+        "ability": "Speed"
+      },
+      {
+        "ability": "Strength"
+      }
+    ],
+    "creator": {
+      "name": "Stan Lee", 
+      "country": "US"
+    }
+  }
+  ```
+
+* **Update Character Record -> PUT**
+
+  ```javascript
+  /api/characters/<CHARACTER-ID>/
+  ```
+  
+* **Delete Character -> DELETE**
+
+  ```javascript
+  /api/Characters/<CHARACTER-ID>/
+  ```
 
 ## License
 
