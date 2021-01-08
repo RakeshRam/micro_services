@@ -53,6 +53,8 @@ python ui_interface/producer.py
 * Demo Super Heros Gallery with vote button.
   * Docker `http://localhost:8001/`
   * Manual `http://localhost:5000/`
+* RabbitMQ integration for message-broker.
+  * [CloudAMQP](https://www.cloudamqp.com/)
 * App Integrated with Docker(Optional)
 
 ---
