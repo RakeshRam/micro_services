@@ -5,15 +5,11 @@ FROM python:3.7
 ENV PYTHONUNBUFFERED 1
 
 # set work directory
-WORKDIR /api_demo_app
+WORKDIR /src/main
 
 # install dependencies
-COPY requirments.txt /api_demo_app/requirments.txt
-RUN pip install -r requirments.txt
+COPY requirements.txt /src/main/requirements.txt
+RUN pip install -r requirements.txt
 
 # copy project
-COPY . /api_demo_app
-
-# copy entrypoint.sh
-COPY ./entrypoint.sh /api_demo_app/entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+COPY . /src/main

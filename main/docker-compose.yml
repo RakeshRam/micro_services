@@ -4,7 +4,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: 'python /src/main/ui_interface/main.py'
     ports:
-      - 8000:8000
+      - 8001:5000
     volumes:
-      - .:/api_demo_app
+      - .:/src/main
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python /src/main/ui_interface/consumer.py'
