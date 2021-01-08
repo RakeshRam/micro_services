@@ -3,7 +3,8 @@ from flask_cors import CORS
 
 app = Flask(__name__, instance_relative_config=True)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///main.sqlite3"
+app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql://root:root@db/main' # On Docker
+# app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///main.sqlite3" # To test on local
 CORS(app)
 
 try:
