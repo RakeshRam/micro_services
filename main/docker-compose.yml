@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     command: 'python /src/main/ui_interface/main.py'
     ports:
-      - 8001:5000
+      - 5000:5000
     volumes:
       - .:/src/main
     depends_on:
