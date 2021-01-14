@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   backend:
+    image: rakeshram909/api-manager:v1
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,6 +14,7 @@ services:
       - db
 
   queue:
+    image: rakeshram909/api-manager-queue:v1
     build:
       context: .
       dockerfile: Dockerfile

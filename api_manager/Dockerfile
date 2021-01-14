@@ -1,15 +1,19 @@
-# pull official base image
-FROM python:3.7
+# Pull official base image
+FROM python:3.7-alpine
 
-# set environment varibles for logging
+# Set environment varibles for logging
 ENV PYTHONUNBUFFERED 1
 
-# set work directory
+# Set work directory
 WORKDIR /src/api_manager
 
-# install dependencies
+# Update For MySQL for python-alpine
+RUN apk update
+RUN apk add musl-dev mariadb-dev gcc
+
+# Install dependencies
 COPY requirements.txt /src/api_manager/requirements.txt
 RUN pip install -r requirements.txt
 
-# copy project
+# Copy project
 COPY . /src/api_manager

@@ -1,15 +1,19 @@
-# pull official base image
-FROM python:3.7
+# Pull Official Base Image
+FROM python:3.7-alpine
 
-# set environment varibles
+# Set Environment varibles
 ENV PYTHONUNBUFFERED 1
 
-# set work directory
+# Set work directory
 WORKDIR /src/main
 
-# install dependencies
+# Update For MySQL for python-alpine
+RUN apk update
+RUN apk add musl-dev mariadb-dev gcc
+
+# Install Dependencies
 COPY requirements.txt /src/main/requirements.txt
 RUN pip install -r requirements.txt
 
-# copy project
+# Copy Project
 COPY . /src/main
