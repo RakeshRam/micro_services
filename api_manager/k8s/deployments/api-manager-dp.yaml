@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-manager
+  labels:
+    app: api-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-manager
+  template:
+    metadata:
+      labels:
+        app: api-manager
+    spec:
+      containers:
+      - name: api-manager
+        image: rakeshram909/api-manager:v1
+        command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000

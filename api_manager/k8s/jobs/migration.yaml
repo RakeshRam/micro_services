@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-migrations
+spec:
+  template:
+    spec:
+      containers:
+        - name: django
+          image: rakeshram909/api-manager:v1
+          command: ['python', 'manage.py', 'migrate']
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom: 
+                configMapKeyRef:
+                  name: mysql-configmap
+                  key: mysql-database
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-root-username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-password
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-root-password
+
+      restartPolicy: Never
+  backoffLimit: 5
