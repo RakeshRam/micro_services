@@ -55,7 +55,8 @@ python consumer.py
   * [Django REST framework](https://www.django-rest-framework.org/)
 * RabbitMQ integration for message-broker.
   * [CloudAMQP](https://www.cloudamqp.com/)
-* App Integrated with Docker(Optional)
+* App Integrated with Docker
+* App Integrated with Kubernetes. [Instructions](k8s/README.md)
 
 ---
 
