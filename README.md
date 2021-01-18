@@ -1,12 +1,20 @@
 # Example Microservices Architecture
 
-Example Microservices Architecture with Django(API), Flask(UI), MySQL, REST and Docker.
+Example Microservices Architecture with Django(API), Flask(UI), MySQL, REST, Docker and Kubernetes.
 
 ## <u>Features</u>
 
-* Django API Application
-* Flask UI Application
-* App Integrated with Docker(Optional)
+* Django API Application.
+* Flask User Application.
+* React UI Interface(TODO).
+* App Integrated with Docker.
+* App Integrated with Kubernetes.
+
+---
+
+## <u>Architecture</u>
+
+![](api_manager/static/img/Micro-Service-Example.png)
 
 ---
 
