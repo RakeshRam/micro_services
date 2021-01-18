@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: api-manager-mq-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: api-manager-mq-consumer
+          image: rakeshram909/api-manager:v1
+          command: ["python", "consumer.py"]
+      restartPolicy: OnFailure
+  backoffLimit: 5

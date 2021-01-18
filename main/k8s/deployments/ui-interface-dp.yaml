@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-interface
+  labels:
+    app: ui-interface
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ui-interface
+  template:
+    metadata:
+      labels:
+        app: ui-interface
+    spec:
+      containers:
+      - name: ui-interface
+        image: rakeshram909/ui-interface:v1
+        command: ["python", "/src/main/ui_interface/main.py"]
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000

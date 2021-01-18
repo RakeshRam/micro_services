@@ -1,6 +1,6 @@
-# Example Django, Kubernetes and MySQL Implementation
+# Example Flask, Kubernetes and MySQL Implementation
 
-Django App Deployed in a Kubernetes(minikube) cluster.
+Flask App Deployed in a Kubernetes(minikube) cluster.
 
 ## <u>Using Minikube(Local SetUp)</u>
 
@@ -28,19 +28,18 @@ kubectl run -it --rm --image=mysql:5.7.22 --restart=Never mysql-client -- mysql 
 
 ---
 
-## <u>Deploy Django App</u>
+## <u>Deploy Flask App</u>
 
 Component | Command
 ------------ | -------------
-Service | kubectl apply -f k8s\services\api-manager-sv.yaml
-Deployment | kubectl apply -f k8s\deployments\api-manager-dp.yaml
+Service | kubectl apply -f k8s\services\ui-interface-sv.yaml
+Deployment | kubectl apply -f k8s\deployments\ui-interface-dp.yaml
 Default Migrations | kubectl apply -f k8s\jobs\migration.yaml
-Core App Migrations | kubectl apply -f k8s\jobs\migration-core.yaml
 MQ Consumer | kubectl apply -f k8s\jobs\mq-consumer.yaml
 
 <br/>
 
-**Connect to Django app instance:**
+**Connect to Flask app instance:**
 
 ```bash
 kubectl exec --stdin --tty <POD-NAME> -- /bin/sh

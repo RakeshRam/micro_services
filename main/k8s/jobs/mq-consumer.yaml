@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ui-interface-mq-consumer
+spec:
+  template:
+    spec:
+      containers:
+        - name: ui-interface-mq-consumer
+          image: rakeshram909/ui-interface:v1
+          command: ["python", "/src/main/ui_interface/consumer.py"]
+      restartPolicy: OnFailure
+  backoffLimit: 5
