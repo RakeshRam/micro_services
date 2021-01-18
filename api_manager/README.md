@@ -49,13 +49,13 @@ python consumer.py
 
 ## <u>Features</u>
 
-* Demo Super Heros Admin Page
+* Demo Super Heros Admin Page.
   * `http://localhost:8000/`
-* Basic DRF implementation(CRUD)
+* Basic DRF implementation(CRUD).
   * [Django REST framework](https://www.django-rest-framework.org/)
 * RabbitMQ integration for message-broker.
   * [CloudAMQP](https://www.cloudamqp.com/)
-* App Integrated with Docker
+* App Integrated with Docker.
 * App Integrated with Kubernetes. [Instructions](k8s/README.md)
 
 ---
