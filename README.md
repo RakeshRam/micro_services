@@ -9,6 +9,8 @@ Example Microservices Architecture with Django(API), Flask(UI), MySQL, REST, Doc
 * React UI Interface(TODO).
 * App Integrated with Docker.
 * App Integrated with Kubernetes.
+* Service Mesh(TODO)
+* Monitoring(Prometheus TODO)
 
 ---
 
